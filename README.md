@@ -9,6 +9,15 @@ Two hand-tuned Windows 64-bit FFmpeg builds produced from **git master** on one 
 
 Both carry version `N-129186-g47f7313e6a-fdk-cuda75-120[-dynamic]` and come with **runnable test suites** (`out\examples\run-all.cmd`, `dynamic\examples\run-all.cmd`) and dedicated READMEs with the full quirk lists.
 
+## Downloads
+
+| Build | Release | Contents |
+|---|---|---|
+| Static (one-file) | [`static-fdk-cuda75-120`](https://github.com/suedenglehem/ffmpeg-sm_75_120-win10/releases/tag/static-fdk-cuda75-120) | `ffmpeg/ffprobe/ffplay.exe` + fontconfig `.cmd` wrappers (zip, 197 MB) |
+| Dynamic (everything) | [`dynamic-fdk-cuda75-120`](https://github.com/suedenglehem/ffmpeg-sm_75_120-win10/releases/tag/dynamic-fdk-cuda75-120) | `bin\` with exes + all 137 DLLs, `examples\` test suite, README (zip, 141 MB) |
+
+Binaries ship as **Release assets** (they exceed GitHub's 100 MB per-file git limit); the repo holds the build system, docs and test suites only.
+
 ## Quick start
 
 ```
