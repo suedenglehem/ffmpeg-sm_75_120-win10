@@ -37,6 +37,7 @@ ode arch=compute_89,code=sm_89 -gencode arch=compute_120,code=sm_120 -gencode ar
  --disable-liboapv --disable-libastcenc --disable-libdavs2 --disable-liblensfun --disable-liblcevc-dec --disable-libquirc --disable-libsvtjpegxs --
 disable-libuavs3d --disable-libxavs2 --disable-whisper --disable-libcodec2 --disable-libilbc --disable-libqrencode --disable-libxevd --disable-libx
 eve --disable-vulkan --disable-opencl --disable-libplacebo --disable-libopencolorio
+
 libavutil      61. 21.100 / 61. 21.100
 libavcodec     63. 28.100 / 63. 28.100
 libavformat    63. 21.100 / 63. 21.100
@@ -66,6 +67,7 @@ enable-librubberband --enable-libsoxr --enable-chromaprint --enable-whisper --en
 75,code=sm_75 -gencode arch=compute_89,code=sm_89 -gencode arch=compute_120,code=sm_120 -gencode arch=compute_120,code=compute_120 -O2' --extra-version=fdk-cuda
 75-120-dynamic --disable-liboapv --disable-libastcenc --disable-libdavs2 --disable-liblensfun --disable-liblcevc-dec --disable-libquirc --disable-libsvtjpegxs -
 -disable-libuavs3d --disable-libxavs2
+
 libavutil      61. 21.100 / 61. 21.100
 libavcodec     63. 28.100 / 63. 28.100
 libavformat    63. 21.100 / 63. 21.100
