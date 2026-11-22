@@ -1,0 +1,33 @@
+# --- secrets: never commit ---
+build/.gh-token
+.gh-token
+*.token
+
+# --- upstream / inputs (not ours) ---
+FFmpeg/
+src/
+downloads/
+avisynthplus/
+ffmpeg-n9.0.2-*/
+
+# --- build products ---
+# static exes (176 MB ea) exceed GitHub's 100 MB file limit -> ship via GitHub Release
+out/bin/
+out/lib/
+out/include/
+out/share/
+out/examples/out/
+dynamic/examples/out/
+# NOTE: dynamic/out/bin IS versioned (57 MB exes + bundled DLLs, under the limit)
+
+# --- logs & scratch ---
+*.log
+build-all.log
+.resume
+build/repro/
+build/*.o
+build/*.exe
+build/*.mp4
+build/*.exports
+build/gcc-E-err.txt
+build/wr-std*.txt
