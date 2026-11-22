@@ -9,73 +9,6 @@ Two hand-tuned Windows 64-bit FFmpeg builds produced from **git master** on one 
 
 Both carry version `N-129186-g47f7313e6a-fdk-cuda75-120[-dynamic]` and come with **runnable test suites** (`out\examples\run-all.cmd`, `dynamic\examples\run-all.cmd`) and dedicated READMEs with the full quirk lists.
 
-Static:
-
-ffmpeg version N-129186-g47f7313e6a-fdk-cuda75-120 Copyright (c) 2000-2026 the FFmpeg developers
-built with gcc 16.2.0 (Rev7, Built by MSYS2 project)
-configuration: --prefix=/h/vscode/ffmpeg/out --pkg-config-flags=--static --extra-cflags='-DLIBTWOLAME_STATIC -DCHROMAPRINT_API_EXPORTS -DCURL_STATI
-CLIB -DNGHTTP2_STATICLIB -DLIBSSH_STATIC -DLIBSSH2_STATIC -DPSL_STATIC -DIDN2_STATIC -DCAIRO_WIN32_STATIC_BUILD -DOPJ_STATIC -DXML_STATIC -DLIBXML_
-STATIC -DGLIB_STATIC_COMPILATION -DGI_STATIC_COMPILATION -DGIO_STATIC_COMPILATION -DGMODULE_STATIC_COMPILATION -DGOBJECT_STATIC_COMPILATION -DFRIBI
-DI_LIB_STATIC -DAL_LIBTYPE_STATIC -DMODPLUG_STATIC -DKHRONOS_STATIC -DLZMA_API_STATIC -DFFI_STATIC_BUILD -DAMQP_STATIC -DZMQ_STATIC -I"C:/cuda128/i
-nclude"' --extra-ldflags='-static -L"C:/cuda128/lib" -L"C:/cuda128/lib/x64"' --extra-libs='-lwinmm -lstdc++ -lpng16 -lz -liconv -lharfbuzz -lmpg123
- -lshlwapi -lgomp -lcrypto -lssl -lws2_32 -lbcrypt -lcrypt32 -ladvapi32 -liphlpapi -lole32 -lavrt -luuid -luser32 -lhwy_imp -lhwy' --enable-gpl --e
-nable-version3 --enable-nonfree --disable-debug --disable-w32threads --enable-pthreads --enable-libfdk-aac --enable-libfdk-xhe-aac --enable-cairo -
--enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-libsnappy --en
-able-zlib --enable-libcurl --enable-librabbitmq --enable-librist --enable-libsrt --enable-libssh --enable-libzmq --enable-avisynth --enable-libblur
-ay --enable-libcaca --enable-libdvdnav --enable-libdvdread --enable-sdl2 --enable-vapoursynth --enable-libaribb24 --enable-libaribcaption --enable-
-libdav1d --enable-libdavs2 --enable-liblcevc-dec --enable-libopenjpeg --enable-libquirc --enable-libuavs3d --enable-libxevd --enable-libzvbi --enab
-le-libastcenc --enable-liboapv --enable-libqrencode --enable-librav1e --enable-libsvtav1 --enable-libvvenc --enable-libwebp --enable-libx264 --enab
-le-libx265 --enable-libxavs2 --enable-libxeve --enable-libxvid --enable-libaom --enable-libjxl --enable-libsvtjpegxs --enable-libvpx --enable-media
-foundation --enable-libass --enable-frei0r --enable-libfreetype --enable-libfribidi --enable-libharfbuzz --enable-liblensfun --enable-libopencolori
-o --enable-libvidstab --enable-libvmaf --enable-libzimg --enable-amf --enable-cuvid --enable-dxva2 --enable-d3d11va --enable-d3d12va --enable-ffnvc
-odec --enable-libvpl --enable-nvdec --enable-nvenc --enable-vaapi --enable-vulkan --enable-libplacebo --enable-opencl --enable-libcdio --enable-ope
-nal --enable-libgme --enable-libmodplug --enable-libopenmpt --enable-libopencore-amrwb --enable-libmp3lame --enable-libshine --enable-libtheora --e
-nable-libtwolame --enable-libvo-amrwbenc --enable-libcodec2 --enable-libilbc --enable-libgsm --enable-liblc3 --enable-libopencore-amrnb --enable-li
-bopus --enable-libspeex --enable-libvorbis --enable-ladspa --enable-libbs2b --enable-libflite --enable-libmysofa --enable-librubberband --enable-li
-bsoxr --enable-chromaprint --enable-whisper --enable-libnpp --nvcc='C:/cuda128/bin/nvcc.exe' --nvccflags='-gencode arch=compute_75,code=sm_75 -genc
-ode arch=compute_89,code=sm_89 -gencode arch=compute_120,code=sm_120 -gencode arch=compute_120,code=compute_120 -O2' --extra-version=fdk-cuda75-120
- --disable-liboapv --disable-libastcenc --disable-libdavs2 --disable-liblensfun --disable-liblcevc-dec --disable-libquirc --disable-libsvtjpegxs --
-disable-libuavs3d --disable-libxavs2 --disable-whisper --disable-libcodec2 --disable-libilbc --disable-libqrencode --disable-libxevd --disable-libx
-eve --disable-vulkan --disable-opencl --disable-libplacebo --disable-libopencolorio
-
-libavutil      61. 21.100 / 61. 21.100
-libavcodec     63. 28.100 / 63. 28.100
-libavformat    63. 21.100 / 63. 21.100
-libavdevice    63.  6.100 / 63.  6.100
-libavfilter    12. 12.100 / 12. 12.100
-libswscale     10.  6.100 / 10.  6.100
-libswresample   7.  7.100 /  7.  7.100
-
-Dynamic:
-
-ffmpeg version N-129186-g47f7313e6a-fdk-cuda75-120-dynamic Copyright (c) 2000-2026 the FFmpeg developers
-built with gcc 16.2.0 (Rev7, Built by MSYS2 project)
-configuration: --prefix=/h/vscode/ffmpeg/dynamic/out --extra-cflags='-I"C:/cuda128/include"' --extra-ldflags='-L"C:/cuda128/lib" -L"C:/cuda128/lib/x64"' --extra
--libs='-lwinmm -lstdc++' --enable-gpl --enable-version3 --enable-nonfree --disable-debug --disable-w32threads --enable-pthreads --enable-libfdk-aac --enable-lib
-fdk-xhe-aac --enable-cairo --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable
--libsnappy --enable-zlib --enable-libcurl --enable-librabbitmq --enable-librist --enable-libsrt --enable-libssh --enable-libzmq --enable-avisynth --enable-libbl
-uray --enable-libcaca --enable-libdvdnav --enable-libdvdread --enable-sdl2 --enable-vapoursynth --enable-libaribb24 --enable-libaribcaption --enable-libdav1d --
-enable-libdavs2 --enable-liblcevc-dec --enable-libopenjpeg --enable-libquirc --enable-libuavs3d --enable-libxevd --enable-libzvbi --enable-libastcenc --enable-l
-iboapv --enable-libqrencode --enable-librav1e --enable-libsvtav1 --enable-libvvenc --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxavs2 --enable
--libxeve --enable-libxvid --enable-libaom --enable-libjxl --enable-libsvtjpegxs --enable-libvpx --enable-mediafoundation --enable-libass --enable-frei0r --enabl
-e-libfreetype --enable-libfribidi --enable-libharfbuzz --enable-liblensfun --enable-libopencolorio --enable-libvidstab --enable-libvmaf --enable-libzimg --enabl
-e-amf --enable-cuvid --enable-dxva2 --enable-d3d11va --enable-d3d12va --enable-ffnvcodec --enable-libvpl --enable-nvdec --enable-nvenc --enable-vaapi --enable-v
-ulkan --enable-libplacebo --enable-opencl --enable-libcdio --enable-openal --enable-libgme --enable-libmodplug --enable-libopenmpt --enable-libopencore-amrwb --
-enable-libmp3lame --enable-libshine --enable-libtheora --enable-libtwolame --enable-libvo-amrwbenc --enable-libcodec2 --enable-libilbc --enable-libgsm --enable-
-liblc3 --enable-libopencore-amrnb --enable-libopus --enable-libspeex --enable-libvorbis --enable-ladspa --enable-libbs2b --enable-libflite --enable-libmysofa --
-enable-librubberband --enable-libsoxr --enable-chromaprint --enable-whisper --enable-libnpp --nvcc='C:/cuda128/bin/nvcc.exe' --nvccflags='-gencode arch=compute_
-75,code=sm_75 -gencode arch=compute_89,code=sm_89 -gencode arch=compute_120,code=sm_120 -gencode arch=compute_120,code=compute_120 -O2' --extra-version=fdk-cuda
-75-120-dynamic --disable-liboapv --disable-libastcenc --disable-libdavs2 --disable-liblensfun --disable-liblcevc-dec --disable-libquirc --disable-libsvtjpegxs -
--disable-libuavs3d --disable-libxavs2
-
-libavutil      61. 21.100 / 61. 21.100
-libavcodec     63. 28.100 / 63. 28.100
-libavformat    63. 21.100 / 63. 21.100
-libavdevice    63.  6.100 / 63.  6.100
-libavfilter    12. 12.100 / 12. 12.100
-libswscale     10.  6.100 / 10.  6.100
-libswresample   7.  7.100 /  7.  7.100
-
 ## Downloads
 
 | Build | Release | Contents |
@@ -83,7 +16,7 @@ libswresample   7.  7.100 /  7.  7.100
 | Static (one-file) | [`static-fdk-cuda75-120`](https://github.com/suedenglehem/ffmpeg-sm_75_120-win10/releases/tag/static-fdk-cuda75-120) | `ffmpeg/ffprobe/ffplay.exe` + fontconfig `.cmd` wrappers (zip, 197 MB) |
 | Dynamic (everything) | [`dynamic-fdk-cuda75-120`](https://github.com/suedenglehem/ffmpeg-sm_75_120-win10/releases/tag/dynamic-fdk-cuda75-120) | `bin\` with exes + all 137 DLLs, `examples\` test suite, README (zip, 141 MB) |
 
-Binaries ship as **Release assets** (they exceed GitHub's 100 MB per-file git limit); the repo holds the build system, docs and test suites only.
+Binaries ship as **Release assets** (they exceed GitHub's 100 MB per-file git limit); the repo holds the build system, docs and test suites only. Full per-build library inventory: [`LIBS_ENABLED.md`](LIBS_ENABLED.md).
 
 ## Quick start
 
