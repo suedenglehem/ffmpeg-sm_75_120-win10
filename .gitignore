@@ -20,6 +20,9 @@ out/examples/out/
 dynamic/examples/out/
 # NOTE: dynamic/out/bin IS versioned (57 MB exes + bundled DLLs, under the limit)
 
+# --- release archives (ship via GitHub Releases, never git) ---
+*.zip
+
 # --- logs & scratch ---
 *.log
 build-all.log
