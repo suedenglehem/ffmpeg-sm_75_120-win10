@@ -7,14 +7,16 @@ Two hand-tuned Windows 64-bit FFmpeg builds produced from **git master** on one 
 | **STATIC** | `out\bin\ffmpeg.exe` (176 MB) | **100% static** — every library linked in, only Windows system DLLs at runtime. Copy one file anywhere. fdk-aac + **xHE-AAC**, NVENC/NVDEC (sm_75/89/120), ~110 libs, fontconfig, srt/ssh/zmq/disc-read. No vulkan/opencl/DLL-only libs. |
 | **DYNAMIC** | `dynamic\out\bin\` (57 MB exes + DLLs) | **Everything enabled** (~120 libs): static's set **plus** whisper (speech→text), codec2, iLBC, qrencode, EVC encode/decode (xeve/xevd), vulkan, OpenCL, libplacebo, OpenColorIO. Ships self-contained with bundled DLLs. |
 
-Both carry version `N-129186-g47f7313e6a-fdk-cuda75-120[-dynamic]` and come with **runnable test suites** (`out\examples\run-all.cmd`, `dynamic\examples\run-all.cmd`) and dedicated READMEs with the full quirk lists. Every library enabled in each build, with what it's for: [`LIBS_ENABLED.md`](LIBS_ENABLED.md).
+Both carry version `N-129186-g47f7313e6a-fdk-cuda75-ptx[-static|-dynamic]` and come with **runnable test suites** (`out\examples\run-all.cmd`, `dynamic\examples\run-all.cmd`) and dedicated READMEs with the full quirk lists. Every library enabled in each build, with what it's for: [`LIBS_ENABLED.md`](LIBS_ENABLED.md).
+
+> **2026-11-26:** the `fdk-cuda75-120` builds shipped **zero `*_cuda` filters** — a broken nvcc recipe (multi-arch `-gencode` can never pass FFmpeg's `-ptx` check; details in [`ffmpeg.md`](ffmpeg.md)). Those releases were deleted; the `fdk-cuda75-ptx` builds below carry all 10 CUDA filters (yadif/scale/overlay/pad/transpose/bwdif/colorspace/thumbnail/chromakey/bilateral) as compute_75 PTX, driver-JIT'd forward on sm_75→Blackwell.
 
 ## Downloads
 
 | Build | Release | Contents |
 |---|---|---|
-| Static (one-file) | [`static-fdk-cuda75-120`](https://github.com/suedenglehem/ffmpeg-sm_75_120-win10/releases/tag/static-fdk-cuda75-120) | `ffmpeg/ffprobe/ffplay.exe` + fontconfig `.cmd` wrappers (zip, 197 MB) |
-| Dynamic (everything) | [`dynamic-fdk-cuda75-120`](https://github.com/suedenglehem/ffmpeg-sm_75_120-win10/releases/tag/dynamic-fdk-cuda75-120) | `bin\` with exes + all 137 DLLs, `examples\` test suite, README (zip, 141 MB) |
+| Static (one-file) | [`static-fdk-cuda75-ptx`](https://github.com/suedenglehem/ffmpeg-sm_75_120-win10/releases/tag/static-fdk-cuda75-ptx) | `ffmpeg/ffprobe/ffplay.exe` + fontconfig `.cmd` wrappers (zip, ~197 MB) |
+| Dynamic (everything) | [`dynamic-fdk-cuda75-ptx`](https://github.com/suedenglehem/ffmpeg-sm_75_120-win10/releases/tag/dynamic-fdk-cuda75-ptx) | `bin\` with exes + all DLLs, `examples\` test suite, README (zip, ~141 MB) |
 
 Binaries ship as **Release assets** (they exceed GitHub's 100 MB per-file git limit); the repo holds the build system, docs and test suites only.
 

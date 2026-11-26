@@ -34,6 +34,10 @@ for i in $(seq 1 40); do
   echo "round $i: $line"
   opt=""
   case "$line" in
+    # nvcc is THE feature of this recipe (the CUDA filters) — never degrade
+    # it away: a silent --disable-cuda-nvcc is exactly how the shipped build
+    # lost yadif/scale/overlay_cuda without anyone noticing. Abort loudly.
+    *nvcc*) echo "NVCC CHECK FAILED — fixing the recipe, not disabling it"; tail -40 $B/configure.log; exit 1;;
     *vidstab*) opt=libvidstab;; *gme*|*game*) opt=libgme;; *astcenc*) opt=libastcenc;;
     *uavs3d*) opt=libuavs3d;; *davs2*) opt=libdavs2;; *xavs2*) opt=libxavs2;;
     *flite*) opt=libflite;; *lcevc*) opt=liblcevc-dec;; *oapv*) opt=liboapv;;

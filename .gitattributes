@@ -1,0 +1,6 @@
+# The build system is bash — CRLF checkout silently breaks every script
+# (shebang becomes "#!/bin/bash\r"). Pin the scripts to LF in the repo AND
+# on checkout, whatever core.autocrlf says on a fresh clone (same rule as
+# the fass-win dist, 2026-11-26).
+*.sh  text eol=lf
+*.cmd text eol=crlf

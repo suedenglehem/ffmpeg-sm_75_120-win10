@@ -1,9 +1,29 @@
 #!/bin/bash
 set -x
-export PATH=/ucrt64/bin:/usr/bin:/bin
+# nvcc on Windows needs: cl.exe (its host compiler), the Windows dirs (it
+# spawns cmd.exe) and TMP (without a temp dir nvcc dies SILENTLY, rc=255 —
+# "failed checking for nvcc" with an empty log; 2026-11-26). Same fix as
+# dynamic/configure-dynamic.sh, where the full story is written down.
+export PATH=/ucrt64/bin:/usr/bin:/bin:/c/windows/system32:/c/windows
+CL_DIR=$(ls -d "/c/Program Files/Microsoft Visual Studio/2022/Enterprise/VC/Tools/MSVC"/*/bin/Hostx64/x64 2>/dev/null | sort -V | tail -1)
+[ -n "$CL_DIR" ] && export PATH="$CL_DIR:$PATH"
+export TMP="$(cygpath -m /tmp)"
+export TEMP="$TMP"
 export MSYSTEM=UCRT64
 CUDA="C:/cuda128"
 cd /h/vscode/ffmpeg/FFmpeg || exit 1
+
+# NOTE: no comment lines may sit INSIDE the ./configure \ continuation
+# below — backslash-newline joins them into the command, where a '#'
+# silently comments out every remaining option (observed 2026-11-26).
+#
+# cuda filters (2026-11-26): --enable-cuda-nvcc + a SINGLE pure-PTX
+# -gencode arch. cuda_nvcc appends -ptx to nvccflags globally, and nvcc
+# forbids -ptx with multiple -gencode archs — the old 75/89/120 SASS
+# triple could NEVER pass check_nvcc, which is why the shipped static
+# build had zero *_cuda filters. compute_75 PTX is driver-JIT'd forward
+# on Turing→Blackwell (the repo's sm_75_120 range). Full story:
+# dynamic/configure-dynamic.sh header.
 
 ./configure \
   --prefix=/h/vscode/ffmpeg/out \
@@ -31,6 +51,7 @@ cd /h/vscode/ffmpeg/FFmpeg || exit 1
   --enable-libvidstab --enable-libvmaf --enable-libzimg \
   --enable-amf --enable-cuvid --enable-dxva2 --enable-d3d11va --enable-d3d12va \
   --enable-ffnvcodec --enable-libvpl --enable-nvdec --enable-nvenc \
+  --enable-cuda-nvcc \
   --enable-vaapi --enable-vulkan --enable-libplacebo --enable-opencl \
   --enable-libcdio --enable-openal --enable-libgme --enable-libmodplug --enable-libopenmpt \
   --enable-libopencore-amrwb --enable-libmp3lame --enable-libshine --enable-libtheora \
@@ -41,6 +62,6 @@ cd /h/vscode/ffmpeg/FFmpeg || exit 1
   --enable-whisper \
   --enable-libnpp \
   --nvcc="C:/cuda128/bin/nvcc.exe" \
-  --nvccflags="-gencode arch=compute_75,code=sm_75 -gencode arch=compute_89,code=sm_89 -gencode arch=compute_120,code=sm_120 -gencode arch=compute_120,code=compute_120 -O2" \
-  --extra-version="fdk-cuda75-120" \
+  --nvccflags="-gencode arch=compute_75,code=compute_75 -O2" \
+  --extra-version="fdk-cuda75-ptx-static" \
   "$@"

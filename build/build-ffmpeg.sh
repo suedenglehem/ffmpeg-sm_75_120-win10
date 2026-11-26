@@ -1,6 +1,15 @@
 #!/bin/bash
 # Wait for source deps, then configure + build FFmpeg.
-export PATH=/ucrt64/bin:/usr/bin:/bin
+# make needs the SAME environment the nvcc check needed: cl.exe (nvcc's
+# Windows host compiler — "Cannot find compiler 'cl.exe' in PATH" kills
+# the vf_*.cuda.ptx rules at MAKE time even when configure passed), the
+# Windows dirs (nvcc spawns cmd.exe), TMP (nvcc dies silently rc=255
+# without it). 2026-11-26, see dynamic/configure-dynamic.sh.
+export PATH="/ucrt64/bin:/usr/bin:/bin:/c/windows/system32:/c/windows"
+CL_DIR=$(ls -d "/c/Program Files/Microsoft Visual Studio/2022/Enterprise/VC/Tools/MSVC"/*/bin/Hostx64/x64 2>/dev/null | sort -V | tail -1)
+[ -n "$CL_DIR" ] && export PATH="$CL_DIR:$PATH"
+export TMP="$(cygpath -m /tmp)"
+export TEMP="$TMP"
 export MSYSTEM=UCRT64
 B=/h/vscode/ffmpeg/build
 
