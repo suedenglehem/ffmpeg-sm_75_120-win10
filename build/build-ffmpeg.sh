@@ -31,6 +31,10 @@ for i in $(seq 1 30); do
   echo "round $i: $line"
   opt=""
   case "$line" in
+    # nvcc is THE feature of this recipe (the CUDA filters) — never degrade
+    # it away: a silent --disable-cuda-nvcc is exactly how the shipped build
+    # lost yadif/scale/overlay_cuda without anyone noticing. Abort loudly.
+    *nvcc*) echo "NVCC CHECK FAILED — fixing the recipe, not disabling it"; tail -40 $B/configure.log; exit 1;;
     *vidstab*) opt=libvidstab;; *gme*|*game*) opt=libgme;; *astcenc*) opt=libastcenc;;
     *uavs3d*) opt=libuavs3d;; *davs2*) opt=libdavs2;; *xavs2*) opt=libxavs2;;
     *flite*) opt=libflite;; *lcevc*) opt=liblcevc-dec;; *oapv*) opt=liboapv;;
@@ -57,7 +61,8 @@ done
 cd /h/vscode/ffmpeg/FFmpeg || exit 1
 # windres needs a console; prebuild the single .rc object via hidden console window
 if [ ! -f fftools/fftoolsres.o ] || [ ffbuild/config.h -nt fftools/fftoolsres.o ]; then
-  powershell.exe -NonInteractive -NoProfile -ExecutionPolicy Bypass -File "$B/windres-fftoolsres.ps1"
+  # powershell.exe is not on the stripped PATH — use the absolute path
+  /c/windows/System32/WindowsPowerShell/v1.0/powershell.exe -NonInteractive -NoProfile -ExecutionPolicy Bypass -File "$B/windres-fftoolsres.ps1"
 fi
 make -j$(nproc) > $B/make.log 2>&1 < /dev/null
 rc=$?

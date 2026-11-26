@@ -73,6 +73,17 @@ now fixed in the scripts (their headers carry the full story):
    newline joins them into the command, where `#` silently comments out
    **every remaining option** (`--nvcc`, `--nvccflags`, … vanish with no
    error). Keep recipe comments out of the continuation block.
+5. **Changing `--nvccflags` does NOT rebuild the PTX.** The `%.ptx` rule
+   depends only on the `.cu` source (and `compat/cuda/cuda_runtime.h`),
+   never on `config.mak` — nvcc silently skips and the binary embeds the
+   OLD PTX under the NEW version string (observed: a `…-ptx` build still
+   carried `.target sm_89` from the previous run). And the PTX is
+   gzipped into the binary via `%.ptx.gz` (CONFIG_SHADER_COMPRESSION),
+   so deleting only `*.ptx` isn't enough. After ANY nvccflags change:
+   `rm libavfilter/*.ptx libavfilter/*.ptx.gz libavfilter/*.ptx.c
+   libavfilter/*.ptx.o` then make+install, and verify
+   `grep -m1 .target libavfilter/vf_yadif_cuda.ptx` (must match the
+   recipe's arch). Same for `.spv`/vulkan shader payloads.
 
 Also: never run the configure script from a **Git-Bash** (tool shell) —
 `/ucrt64` doesn't exist there, gcc isn't found, "C compiler test failed"

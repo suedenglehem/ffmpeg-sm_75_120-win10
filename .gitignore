@@ -35,3 +35,5 @@ build/*.mp4
 build/*.exports
 build/gcc-E-err.txt
 build/wr-std*.txt
+release-assets/
+nvdiag.*

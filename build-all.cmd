@@ -6,9 +6,12 @@ if not exist C:\msys64\usr\bin\bash.exe (
   pause
   exit /b 1
 )
+REM POSIX form of this folder, so the repo works from any path
+set "REPOROOT=%~dp0"
+for /f "delims=" %%p in ('C:\msys64\usr\bin\cygpath -u "%REPOROOT%"') do set "REPOROOT_POSIX=%%p"
 set LOG=%~dp0build-all.log
 echo Running master build (static then dynamic), logging to %LOG%
-C:\msys64\usr\bin\bash.exe -lc "export MSYSTEM=UCRT64 PATH=/ucrt64/bin:/usr/bin:/bin; /h/vscode/ffmpeg/build-all.sh 2>&1 | tee /h/vscode/ffmpeg/build-all.log"
+C:\msys64\usr\bin\bash.exe -lc "export MSYSTEM=UCRT64 PATH=/ucrt64/bin:/usr/bin:/bin; %REPOROOT_POSIX%/build-all.sh 2>&1 | tee %REPOROOT_POSIX%/build-all.log"
 echo.
 echo Finished. Full log: %LOG%
 pause
